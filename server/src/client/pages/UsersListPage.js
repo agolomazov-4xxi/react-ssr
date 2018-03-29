@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import {fetchUsers} from '../actions';
 import styled from 'styled-components';
@@ -12,27 +12,27 @@ const PageTitle = styled.div`
 
 class UsersList extends Component {
   componentDidMount() {
-    this.props.fetchUsers();
+    // this.props.fetchUsers();
   }
 
   renderUsers() {
     return this.props.users.map(user => (
-      <div key={user.id}>
+      <li key={user.id}>
         { user.name }
-      </div>
+      </li>
     ));
   }
 
   render() {
     return (
-      <div>
+      <Fragment>
         <PageTitle>
           Here's a big list of users:
         </PageTitle>
         <ul>
           { this.renderUsers() }
         </ul>
-      </div>
+      </Fragment>
     );
   }
 }
@@ -41,4 +41,12 @@ const mapStateToProps = state => ({
   users: state.users
 });
 
-export default connect(mapStateToProps, {fetchUsers})(UsersList);
+function loadData(store) {
+  return store.dispatch(fetchUsers());
+}
+
+
+export default {
+  loadData,
+  component: connect(mapStateToProps, {fetchUsers})(UsersList)
+};
