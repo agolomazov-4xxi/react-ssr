@@ -1,6 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchUsers } from '../actions';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchUsers} from '../actions';
+import styled from 'styled-components';
+
+const PageTitle = styled.div`
+  background: #ceeccc;
+  font-weight: 300;
+  font-size: 28px;
+  color: #333;
+`;
 
 class UsersList extends Component {
   componentDidMount() {
@@ -15,10 +23,12 @@ class UsersList extends Component {
     ));
   }
 
-  render () {
+  render() {
     return (
       <div>
-        Here's a big list of users:
+        <PageTitle>
+          Here's a big list of users:
+        </PageTitle>
         <ul>
           { this.renderUsers() }
         </ul>
@@ -31,4 +41,4 @@ const mapStateToProps = state => ({
   users: state.users
 });
 
-export default connect(mapStateToProps, { fetchUsers })(UsersList);
+export default connect(mapStateToProps, {fetchUsers})(UsersList);
