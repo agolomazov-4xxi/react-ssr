@@ -12,7 +12,7 @@ const PageTitle = styled.div`
 
 class UsersList extends Component {
   componentDidMount() {
-    // this.props.fetchUsers();
+    this.props.fetchUsers();
   }
 
   renderUsers() {
